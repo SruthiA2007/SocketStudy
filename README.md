@@ -57,15 +57,43 @@ Socket programming finds applications in various domains, including web developm
 
 client
 
-![image](https://github.com/user-attachments/assets/6901c1b6-4c7c-47c6-a919-b08a30bd113a)
+```
+	import socket
+	from datetime import datetime
+	 
+	s=socket.socket()
+	 
+	s.bind(('127.0.0.1',8001))
+	 
+	s.listen(5)
+	c,addr=s.accept()
+	print("Client Address : ",addr)
+	 
+	now = datetime.now()
+	 
+	c.send(now.strftime("%d/%m/%Y %H:%M:%S").encode())
+	ack=c.recv(1024).decode()
+	 
+	if ack:
+	    print(ack)
+	 
+	c.close()
+```
 
 server
 
-![image](https://github.com/user-attachments/assets/3bc96826-4009-4458-b338-a79465d729b5)
-
+```
+	import socket 
+	s=socket.socket() 
+	s.connect(('127.0.0.1',8001)) 
+	print(s.getsockname()) 
+	print(s.recv(1024).decode()) 
+	s.send("acknowledgement recived from the server".encode())
+```
 ##Output
 
-![image](https://github.com/user-attachments/assets/92ab2b2a-deb1-4b88-8c5f-b52c55a9ddf9)
+![Screenshot 2025-05-12 193520](https://github.com/user-attachments/assets/4a467731-b05c-4625-9a57-bbca1513e8e1)
+
 
 ## Result:
 Thus the study of Socket Programming Completed Successfully
